@@ -1,16 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { initialBackgroundColor, buttonsColor } from "../../constants/colors";
 import axios from "axios";
 import {ThreeDots} from "react-loader-spinner";
 import Logo from "../../components/Logo";
+import { MyContext } from "../../constants/MyContext";
 
 export default function LoginPage ({url}){
 
     const [form, setForm] = useState({email: "", password: ""});
     const [disabled, setDisabled] = useState(false);
     const nav = useNavigate();
+    const {setUserData} = useContext(MyContext);
 
     function handleForm (e){
         setForm({ ...form, [e.target.name]: e.target.value })
@@ -21,7 +23,7 @@ export default function LoginPage ({url}){
         setDisabled(true);
         axios.post(`${url}auth/login`, form)
         .then(res => {
-            console.log(res.data)
+            setUserData(res.data)
             nav("/hoje")
         })
         .catch(error => {
@@ -70,7 +72,7 @@ export default function LoginPage ({url}){
                 </button>
             </FormConatiner>
 
-            <Link data-test="signup-link" to={"/cadastro"}><RegisterButton>
+            <Link to={"/cadastro"}><RegisterButton data-test="signup-link">
                 Não tem conta? Cadastre-se!
             </RegisterButton></Link>
         </Container>

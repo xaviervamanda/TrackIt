@@ -89,7 +89,7 @@ export default function RegisterPage ({url}){
                 </button>
             </FormConatiner>
 
-            <Link data-test="login-link" to={"/"}><LoginButton>
+            <Link to={"/"}><LoginButton data-test="login-link" >
                 Já tem conta? Faça login!
             </LoginButton></Link>
 
