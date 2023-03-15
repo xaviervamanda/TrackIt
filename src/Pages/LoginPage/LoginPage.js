@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../../assets/logo.png"
 import { initialBackgroundColor, buttonsColor } from "../../constants/colors";
 import axios from "axios";
 import {ThreeDots} from "react-loader-spinner";
+import Logo from "../../components/Logo";
 
 export default function LoginPage ({url}){
 
@@ -33,9 +33,7 @@ export default function LoginPage ({url}){
 
     return (
         <Container>
-            <Logo>
-                <img src={logo} alt="Logo do TrackIt" />
-            </Logo>
+            <Logo />
 
             <FormConatiner onSubmit={(e) => enterTrackIt(e)}>
                 <input data-test="email-input" 
@@ -86,17 +84,6 @@ const Container = styled.div`
     position: relative;
 `
 
-const Logo = styled.div`
-    width: 180px;
-    height: 178.38px;
-    position: absolute;
-    left: 97px;
-    top: 68px;
-    img{
-        width: 180px;
-        height: 178.38px;  
-    }
-`
 
 const FormConatiner = styled.form`
     display: flex;
