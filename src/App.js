@@ -12,8 +12,10 @@ export default function App() {
   const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/";
   const [userData, setUserData] = useState(null);
   const [userHabits, setUserHabits] = useState([]);
+  const [doneHabits, setDoneHabits] = useState(0);
   const contextValue = {userData: userData, 
-    setUserData: setUserData, userHabits: userHabits, setUserHabits: setUserHabits}
+    setUserData: setUserData, userHabits: userHabits, 
+    setUserHabits: setUserHabits, doneHabits: doneHabits, setDoneHabits: setDoneHabits}
 
   return (
     <MyContext.Provider value={contextValue}>
@@ -22,7 +24,7 @@ export default function App() {
           <Route path="/" element={<LoginPage url={url}/>}/>
           <Route path="/cadastro" element={<RegisterPage url={url}/>}/>
           <Route path="/habitos" element={<HabitsPage url={url}/>}/>
-          <Route path="/hoje" element={<TodayHabitsPage url={url}/>}/>
+          <Route path="/hoje" element={<TodayHabitsPage url={url} />}/>
           <Route path="/historico" element={<HistoricPage url={url}/>}/>
         </Routes>
       </BrowserRouter>

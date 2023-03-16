@@ -6,17 +6,21 @@ import dayjs from "dayjs";
 import locale from "dayjs/locale/pt-br";
 import TopBar from "../../components/TopBar";
 import MenuBar from "../../components/MenuBar";
+import { generalBackgroundColor, principalTitlesColor } from "../../constants/colors";
+import ContainerHabit from "../../components/ContainerHabit";
 
 
 export default function TodayHabitsPage ({url}){
 
+    const weekDays = ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'];
+
     const today = dayjs().locale('pt-br');
     const date = today.format('DD/MM');
     console.log(date);
-    const weekDay = today.format('dddd');
+    const weekDay = today.format('d');
     console.log(weekDay);
 
-    const {userData, setUserHabits} = useContext(MyContext);
+    const {userData, setUserHabits, userHabits, doneHabits} = useContext(MyContext);
 
     const body = {
         headers: {Authorization: `Bearer ${userData.token}`}
@@ -28,11 +32,57 @@ export default function TodayHabitsPage ({url}){
         .catch(error => console.log(error.response.data.message))
     }, []);
 
+    console.log(userHabits)
+
     return (
-        <>
-        <TopBar />
-        <div>Página de hábitos de hoje</div>
-        <MenuBar />
-        </>
+        <Container>
+            <TopBar />
+            <Date data-test="today">{weekDays[weekDay]}, {date}</Date>
+
+            <SubTitle data-test="today-counter" userHabits={userHabits.length}>
+                {userHabits.length === 0 ? (
+                "Nenhum hábito concluído ainda"
+                ) : (
+                    `${doneHabits}% dos hábitos concluídos`
+                )}
+            </SubTitle>
+            
+            <ContainerHabit />
+            <MenuBar />
+        </Container>
     );
 }
+
+const Container = styled.div`
+    width: 375px;
+    height: 667px;
+    background-color: ${generalBackgroundColor};
+    position: relative;
+`
+const Date = styled.div`
+    position: absolute;
+    width: 172px;
+    height: 29px;
+    left: 17px;
+    top: 98px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 22.976px;
+    line-height: 29px;
+    color: ${principalTitlesColor};
+`
+const SubTitle = styled.div`
+    position: absolute;
+    width: 278px;
+    height: 22px;
+    left: 17px;
+    top: 127px;
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    line-height: 22px;
+    margin-bottom: 28px;
+    color: ${props => props.userHabits === 0 ? '#BABABA' : '#8FC549'};
+`

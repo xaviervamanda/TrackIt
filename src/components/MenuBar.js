@@ -7,8 +7,7 @@ import { Link } from "react-router-dom";
 
 export default function MenuBar (){
     
-    const {userHabits} = useContext(MyContext);
-    const [percentage, setPercentage] = useState(0);
+    const {userHabits, setDoneHabits, doneHabits} = useContext(MyContext);
 
     useEffect(() => {
         if (userHabits.length !== 0){
@@ -16,7 +15,7 @@ export default function MenuBar (){
             console.log(habitsDone);
             const newPercentage = (habitsDone.length * 100)/(userHabits.length);
             console.log(newPercentage);
-            setPercentage(newPercentage); 
+            setDoneHabits(newPercentage); 
         }
         
     }, [userHabits])
@@ -26,7 +25,7 @@ export default function MenuBar (){
             <StyledLink data-test="habit-link" to={"/habitos"}><Options>Hábitos</Options></StyledLink>
            
             <Link data-test="today-link" to={"/hoje"}><StyledCircularProgressbar 
-                value={percentage} 
+                value={doneHabits} 
                 background 
                 backgroundPadding={6}
                 styles={
