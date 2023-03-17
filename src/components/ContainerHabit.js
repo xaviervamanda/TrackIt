@@ -21,7 +21,7 @@ export default function ContainerHabit (){
         
         <Container>
             {userHabits.map ((habit) => (   
-                <Habit  data-test="today-habit-container" record={() => record (habit)}>
+                <Habit  data-test="today-habit-container" key={habit.id} record={() => record (habit)}>
                     <h1 data-test="today-habit-name">{habit.name}</h1>
                     <div>
                         <h2 data-test="today-habit-sequence">Sequência atual: <span>{habit.currentSequence} dias</span></h2>
@@ -37,10 +37,11 @@ export default function ContainerHabit (){
 
 const Container = styled.div`
     width: 340px;
-    height: 667px;
+    height: 404px;
     position: absolute;
     top:177px;
     left:18px;
+    overflow-y: scroll;
 `
 
 const Habit = styled.div`

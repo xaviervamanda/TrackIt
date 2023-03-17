@@ -6,8 +6,7 @@ import { MyContext } from "../constants/MyContext";
 export default function TopBar (){
 
     const {userData} = useContext(MyContext);
-    const userImage = userData.image
-    console.log(userData)
+    const userImage = userData.image;
 
     return (
         <Container data-test="header">
@@ -30,6 +29,7 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    z-index: 1;
     h1 {
         font-family: 'Playball';
         font-style: normal;

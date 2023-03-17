@@ -8,6 +8,7 @@ import TopBar from "../../components/TopBar";
 import MenuBar from "../../components/MenuBar";
 import { generalBackgroundColor, principalTitlesColor } from "../../constants/colors";
 import ContainerHabit from "../../components/ContainerHabit";
+import { ColorRing } from "react-loader-spinner";
 
 
 export default function TodayHabitsPage ({url}){
@@ -22,12 +23,12 @@ export default function TodayHabitsPage ({url}){
 
     const {userData, setUserHabits, userHabits, doneHabits} = useContext(MyContext);
 
-    const body = {
+    const token = {
         headers: {Authorization: `Bearer ${userData.token}`}
     };
 
     useEffect(() => {
-        axios.get(`${url}/habits/today`, body)
+        axios.get(`${url}/habits/today`, token)
         .then(res => setUserHabits(res.data))
         .catch(error => console.log(error.response.data.message))
     }, []);
@@ -39,8 +40,8 @@ export default function TodayHabitsPage ({url}){
             <TopBar />
             <Date data-test="today">{weekDays[weekDay]}, {date}</Date>
 
-            <SubTitle data-test="today-counter" userHabits={userHabits.length}>
-                {userHabits.length === 0 ? (
+            <SubTitle data-test="today-counter" userHabits={userHabits.length} doneHabits={doneHabits}>
+                {userHabits.length === 0 || doneHabits === 0 ? (
                 "Nenhum hábito concluído ainda"
                 ) : (
                     `${doneHabits}% dos hábitos concluídos`
@@ -84,5 +85,5 @@ const SubTitle = styled.div`
     font-size: 17.976px;
     line-height: 22px;
     margin-bottom: 28px;
-    color: ${props => props.userHabits === 0 ? '#BABABA' : '#8FC549'};
+    color: ${props => props.userHabits === 0 || props.doneHabits === 0 ? '#BABABA' : '#8FC549'};
 `

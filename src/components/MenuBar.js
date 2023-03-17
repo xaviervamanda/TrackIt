@@ -15,7 +15,7 @@ export default function MenuBar (){
             console.log(habitsDone);
             const newPercentage = (habitsDone.length * 100)/(userHabits.length);
             console.log(newPercentage);
-            setDoneHabits(newPercentage); 
+            setDoneHabits(newPercentage.toFixed(0));
         }
         
     }, [userHabits])
