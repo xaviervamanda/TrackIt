@@ -10,8 +10,8 @@ export default function MenuBar (){
     const {userHabits, setDoneHabits, doneHabits} = useContext(MyContext);
 
     useEffect(() => {
-        if (userHabits.length !== 0){
-           const habitsDone = userHabits.filter((habit) => habit.done);
+        if (userHabits !== null){
+            const habitsDone = userHabits.filter((habit) => habit.done);
             console.log(habitsDone);
             const newPercentage = (habitsDone.length * 100)/(userHabits.length);
             console.log(newPercentage);

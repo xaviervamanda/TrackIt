@@ -34,6 +34,28 @@ export default function TodayHabitsPage ({url}){
     }, []);
 
     console.log(userHabits)
+    console.log(doneHabits)
+
+    if (userHabits === null){
+        return <>
+        <TopBar />
+        <ColorRing
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)'
+        }}
+        wrapperClass="blocks-wrapper"
+        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />
+        <MenuBar/>
+      </>
+    }
 
     return (
         <Container>
@@ -41,8 +63,8 @@ export default function TodayHabitsPage ({url}){
             <Date data-test="today">{weekDays[weekDay]}, {date}</Date>
 
             <SubTitle data-test="today-counter" userHabits={userHabits.length} doneHabits={doneHabits}>
-                {userHabits.length === 0 || doneHabits === 0 ? (
-                "Nenhum hábito concluído ainda"
+                {(userHabits.length === 0 || doneHabits === 0) ? (
+                    "Nenhum hábito concluído ainda"
                 ) : (
                     `${doneHabits}% dos hábitos concluídos`
                 )}
@@ -85,5 +107,5 @@ const SubTitle = styled.div`
     font-size: 17.976px;
     line-height: 22px;
     margin-bottom: 28px;
-    color: ${props => props.userHabits === 0 || props.doneHabits === 0 ? '#BABABA' : '#8FC549'};
+    color: ${props => (props.userHabits === 0 || props.doneHabits) === 0 ? '#BABABA' : '#8FC549'};
 `

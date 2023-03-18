@@ -9,7 +9,7 @@ export default function ContainerHabit (){
     const {userHabits} = useContext(MyContext);
 
     function record (hab){
-        if (hab.currentSequence === hab.highestSequence){
+        if (hab.currentSequence === hab.highestSequence && hab.currentSequence !== 0){
             return true
         } else {
             return false

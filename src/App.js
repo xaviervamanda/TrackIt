@@ -11,7 +11,7 @@ export default function App() {
 
   const url = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/";
   const [userData, setUserData] = useState(null);
-  const [userHabits, setUserHabits] = useState([]);
+  const [userHabits, setUserHabits] = useState(null);
   const [doneHabits, setDoneHabits] = useState(0);
   const contextValue = {userData: userData, 
     setUserData: setUserData, userHabits: userHabits, 

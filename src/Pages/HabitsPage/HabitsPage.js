@@ -8,10 +8,12 @@ import TopBar from "../../components/TopBar";
 import MenuBar from "../../components/MenuBar";
 import AllUserHabits from "../../components/AllUserHabits";
 import ContainerAddHabit from "../../components/ContainerAddHabit";
+import { ColorRing } from "react-loader-spinner";
 
 export default function HabitsPage ({url}){
 
-    const [allHabits, setAllHabits] = useState([]);
+    const [allHabits, setAllHabits] = useState(null);
+    const [addHabit, setAddHabit] = useState(false);
     const {userData} = useContext(MyContext);
     const token = {
         headers: {Authorization: `Bearer ${userData.token}`}
@@ -23,6 +25,27 @@ export default function HabitsPage ({url}){
         .catch((error) => console.log(error.response.data.message))
     }, []);
 
+    if (allHabits === null){
+        return <>
+        <TopBar />
+        <ColorRing
+        visible={true}
+        height="80"
+        width="80"
+        ariaLabel="blocks-loading"
+        wrapperStyle={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)'
+        }}
+        wrapperClass="blocks-wrapper"
+        colors={['#e15b64', '#f47e60', '#f8b26a', '#abbd81', '#849b87']}
+        />
+        <MenuBar/>
+      </>
+    }
+
     console.log(allHabits)
 
     return (
@@ -32,11 +55,12 @@ export default function HabitsPage ({url}){
             <TopBar />
             <Title>Meus hábitos</Title>
             <PlusIcon data-test="habit-create-btn" onClick={() => {
-                return <ContainerAddHabit />
+                setAddHabit(true)
             }}/>
-            
-            <AllUserHabits allHabits={allHabits} setAllHabits={setAllHabits} url={url}/>
-            
+            <ContainerAddHabit setAddHabit={setAddHabit} 
+            addHabit={addHabit} allHabits={allHabits} 
+            url={url} setAllHabits={setAllHabits}/>
+            <AllUserHabits addHabit={addHabit} allHabits={allHabits} setAllHabits={setAllHabits} url={url}/>
             <MenuBar />
         </Container>
         

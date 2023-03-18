@@ -4,12 +4,10 @@ import { buttonTextColor, textsColor } from "../constants/colors";
 import axios from "axios";
 import { useContext } from "react";
 import { MyContext } from "../constants/MyContext";
-import { useNavigate } from "react-router-dom";
 
-export default function AllUserHabits ({url, allHabits, setAllHabits}){
+export default function AllUserHabits ({url, allHabits, setAllHabits, addHabit}){
 
     const {userData} = useContext(MyContext);
-    const nav = useNavigate()
 
     function deleteHabit (id){
         if (window.confirm("Você gostaria realmente de apagar esse hábito?")){
@@ -25,7 +23,7 @@ export default function AllUserHabits ({url, allHabits, setAllHabits}){
     }
 
     return (
-        <Container>
+        <Container addHabit={addHabit}>
             {allHabits.length !== 0 ? (
                 allHabits.map ((habit) => (
                     <ContainerHabit key={habit.id} data-test="habit-container">
@@ -55,6 +53,7 @@ const Container = styled.div`
     left: 17px;
     top: 147px;
     overflow-y: scroll;
+    display: ${props => props.addHabit ? "none" : "initial"};
 `
 const HabitName = styled.div`
     position: absolute;
