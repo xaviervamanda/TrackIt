@@ -1,20 +1,50 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import styled from "styled-components";
 import { MyContext } from "../constants/MyContext";
 import { initialBackgroundColor, textsColor } from "../constants/colors";
 import {BsFillCheckSquareFill} from "react-icons/bs"
+import axios from "axios";
 
-export default function ContainerHabit (){
+export default function ContainerHabit ({url}){
 
-    const {userHabits} = useContext(MyContext);
+    const {userHabits, userData, setUserHabits} = useContext(MyContext);
 
     function record (hab){
-        if (hab.currentSequence === hab.highestSequence && hab.currentSequence !== 0){
-            return true
+        if (hab.currentSequence === hab.highestSequence){
+            if(hab.currentSequence !== 0){
+               return true 
+            }
+            return false
+            
         } else {
             return false
         }
-    }  
+    } 
+    
+    function handleHabit (id, done){
+        const token = {
+            headers: {Authorization: `Bearer ${userData.token}`}
+        };
+        if (done){
+            axios.post (`${url}habits/${id}/uncheck`, {}, token)
+            .then(() => {
+                axios.get(`${url}/habits/today`, token)
+                .then(res => setUserHabits(res.data))
+                .catch(error => console.log(error.response.data.message))
+            })
+            .catch(error => alert(error.response.data.message))
+        } else {
+            axios.post (`${url}habits/${id}/check`, {}, token)
+            .then(() => {
+                axios.get(`${url}/habits/today`, token)
+                .then(res => setUserHabits(res.data))
+                .catch(error => console.log(error.response.data.message))
+            })
+            .catch(error => alert(error.response.data.message))
+        }
+        
+
+    }
 
 
     return (
@@ -27,7 +57,7 @@ export default function ContainerHabit (){
                         <h2 data-test="today-habit-sequence">Sequência atual: <span>{habit.currentSequence} dias</span></h2>
                         <h2 data-test="today-habit-record">Seu recorde: <span>{habit.highestSequence} dias</span></h2>
                     </div>
-                    <Icon data-test="today-habit-check-btn" done={habit.done}/>
+                    <Icon data-test="today-habit-check-btn" onClick={() => handleHabit(habit.id, habit.done)} done={habit.done}/>
                 </Habit> 
             ))}
         </Container>

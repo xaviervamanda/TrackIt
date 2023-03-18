@@ -5,9 +5,9 @@ import axios from "axios";
 import { useContext } from "react";
 import { MyContext } from "../constants/MyContext";
 
-export default function AllUserHabits ({url, allHabits, setAllHabits, addHabit}){
+export default function AllUserHabits ({url, addHabit}){
 
-    const {userData} = useContext(MyContext);
+    const {userData, allHabits, setAllHabits} = useContext(MyContext);
 
     function deleteHabit (id){
         if (window.confirm("Você gostaria realmente de apagar esse hábito?")){

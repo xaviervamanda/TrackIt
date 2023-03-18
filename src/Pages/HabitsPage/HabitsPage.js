@@ -12,9 +12,8 @@ import { ColorRing } from "react-loader-spinner";
 
 export default function HabitsPage ({url}){
 
-    const [allHabits, setAllHabits] = useState(null);
     const [addHabit, setAddHabit] = useState(false);
-    const {userData} = useContext(MyContext);
+    const {userData, allHabits, setAllHabits} = useContext(MyContext);
     const token = {
         headers: {Authorization: `Bearer ${userData.token}`}
     };
@@ -58,9 +57,8 @@ export default function HabitsPage ({url}){
                 setAddHabit(true)
             }}/>
             <ContainerAddHabit setAddHabit={setAddHabit} 
-            addHabit={addHabit} allHabits={allHabits} 
-            url={url} setAllHabits={setAllHabits}/>
-            <AllUserHabits addHabit={addHabit} allHabits={allHabits} setAllHabits={setAllHabits} url={url}/>
+            addHabit={addHabit} url={url} />
+            <AllUserHabits addHabit={addHabit} url={url}/>
             <MenuBar />
         </Container>
         

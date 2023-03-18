@@ -70,7 +70,7 @@ export default function TodayHabitsPage ({url}){
                 )}
             </SubTitle>
             
-            <ContainerHabit />
+            <ContainerHabit url={url}/>
             <MenuBar />
         </Container>
     );
@@ -107,5 +107,5 @@ const SubTitle = styled.div`
     font-size: 17.976px;
     line-height: 22px;
     margin-bottom: 28px;
-    color: ${props => (props.userHabits === 0 || props.doneHabits) === 0 ? '#BABABA' : '#8FC549'};
+    color: ${props => (props.userHabits === 0 || props.doneHabits === 0) ? '#BABABA' : '#8FC549'};
 `

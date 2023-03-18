@@ -13,9 +13,12 @@ export default function App() {
   const [userData, setUserData] = useState(null);
   const [userHabits, setUserHabits] = useState(null);
   const [doneHabits, setDoneHabits] = useState(0);
+  const [allHabits, setAllHabits] = useState(null);
   const contextValue = {userData: userData, 
     setUserData: setUserData, userHabits: userHabits, 
-    setUserHabits: setUserHabits, doneHabits: doneHabits, setDoneHabits: setDoneHabits}
+    setUserHabits: setUserHabits, doneHabits: doneHabits, 
+    setDoneHabits: setDoneHabits, allHabits: allHabits,
+    setAllHabits: setAllHabits}
 
   return (
     <MyContext.Provider value={contextValue}>

@@ -6,11 +6,11 @@ import { MyContext } from "../constants/MyContext";
 import { ThreeDots } from "react-loader-spinner";
 
 
-export default function ContainerAddHabit ({addHabit, allHabits, url, setAddHabit, setAllHabits}){
+export default function ContainerAddHabit ({addHabit, url, setAddHabit}){
 
     const [habitName, setHabitName] = useState("");
     const [habitDays, setHabitDays] = useState([]);
-    const {userData} = useContext(MyContext);
+    const {userData, allHabits, setAllHabits} = useContext(MyContext);
     const [disabled, setDisabled] = useState(false);
 
     function handleDayButton (buttonNumber){
@@ -50,8 +50,7 @@ export default function ContainerAddHabit ({addHabit, allHabits, url, setAddHabi
     }
 
     function cancelHabit (){
-        console.log("cancelando")
-        // cancelar habito
+        setAddHabit(false);
     }
 
     return (
