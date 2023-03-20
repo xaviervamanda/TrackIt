@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 export default function MenuBar (){
     
     const {userHabits, setDoneHabits, doneHabits} = useContext(MyContext);
+    console.log(userHabits)
 
     useEffect(() => {
         if (userHabits !== null){
@@ -16,6 +17,8 @@ export default function MenuBar (){
             const newPercentage = (habitsDone.length * 100)/(userHabits.length);
             console.log(newPercentage);
             setDoneHabits(newPercentage.toFixed(0));
+        } else {
+            return
         }
         
     }, [userHabits])

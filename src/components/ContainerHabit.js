@@ -57,7 +57,8 @@ export default function ContainerHabit ({url}){
                         <h2 data-test="today-habit-sequence">Sequência atual: <span>{habit.currentSequence} dias</span></h2>
                         <h2 data-test="today-habit-record">Seu recorde: <span>{habit.highestSequence} dias</span></h2>
                     </div>
-                    <Icon data-test="today-habit-check-btn" onClick={() => handleHabit(habit.id, habit.done)} done={habit.done}/>
+                    <Icon data-test="today-habit-check-btn" 
+                    onClick={() => handleHabit(habit.id, habit.done)} done={habit.done}/>
                 </Habit> 
             ))}
         </Container>
@@ -73,7 +74,6 @@ const Container = styled.div`
     left:18px;
     overflow-y: scroll;
 `
-
 const Habit = styled.div`
     width: 340px;
     height: 94px;

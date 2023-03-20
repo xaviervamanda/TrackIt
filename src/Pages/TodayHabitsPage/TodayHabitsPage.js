@@ -84,7 +84,7 @@ const Container = styled.div`
 `
 const Date = styled.div`
     position: absolute;
-    width: 172px;
+    width: 280px;
     height: 29px;
     left: 17px;
     top: 98px;
